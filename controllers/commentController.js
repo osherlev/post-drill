@@ -32,4 +32,17 @@ const getCommentsbySender = async (req, res) => {
   }
 };
 
-module.exports = { createComment, getCommentsbySender };
+const getCommentById = async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+    if (comment) {
+      res.send(comment);
+    } else {
+      res.status(404).send("Comment was not found");
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+module.exports = { createComment, getCommentsbySender, getCommentById };
