@@ -11,10 +11,10 @@ const createPost = async (req, res) => {
 };
 
 const getAllPosts = async (req, res) => {
-  const filter = req.query.owner;
+  const filter = req.query.sender;
   let posts;
   try {
-    posts = filter ? await Post.find({ owner: filter }) : await Post.find();
+    posts = filter ? await Post.find({ sender: filter }) : await Post.find();
     res.send(posts);
   } catch (error) {
     res.status(400).send(error.message);
@@ -44,11 +44,14 @@ const getPostsBySender = async (req, res) => {
       return res.status(400).json({ message: "Sender parameter is required" });
     }
     const posts = await Post.find({ sender });
-
+    if (posts.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No posts found for this sender" });
+    }
     res.status(200).json(posts);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "An error occurred while fetching posts" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -65,7 +68,7 @@ const updatePost = async (req, res) => {
     }
     res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
