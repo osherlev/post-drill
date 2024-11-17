@@ -19,7 +19,7 @@ const createComment = async (req, res) => {
   }
 };
 
-const getAllComments = async (req, res) => {
+const getCommentsbySender = async (req, res) => {
   const filter = req.body.sender;
   let comments;
   try {
@@ -32,4 +32,4 @@ const getAllComments = async (req, res) => {
   }
 };
 
-module.exports = { createComment, getAllComments };
+module.exports = { createComment, getCommentsbySender };
