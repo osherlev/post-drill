@@ -38,12 +38,8 @@ const getPostById = async (req, res) => {
 
 const getPostsBySender = async (req, res) => {
   try {
-    const sender = req.query.sender;
-
-    if (!sender) {
-      return res.status(400).json({ message: "Sender parameter is required" });
-    }
-    const posts = await Post.find({ sender });
+    const { sender } = req.query.sender;
+    const posts = await Post.find(sender);
     if (posts.length === 0) {
       return res
         .status(404)
@@ -68,7 +64,7 @@ const updatePost = async (req, res) => {
     }
     res.status(200).json(post);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: err.message });
   }
 };
 
