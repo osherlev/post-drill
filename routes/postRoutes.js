@@ -8,7 +8,7 @@ router.get("/getAllPosts", postController.getAllPosts);
 
 router.get("/:id", postController.getPostById);
 
-router.get("/post", postController.getPostsBySender);
+router.get("/", postController.getPostsBySender);
 
 router.put("/:id", postController.updatePost);
 
