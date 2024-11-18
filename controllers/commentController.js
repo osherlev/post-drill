@@ -40,7 +40,7 @@ const getCommentById = async (req, res) => {
 
 const getCommentsByPost = async (req, res) => {
     try {
-        const {postId} = req.params;
+        const postId = req.params.postId;
         if (!postId) {
             return res.status(400).json({error: "Post ID is required."});
         }
@@ -50,8 +50,7 @@ const getCommentsByPost = async (req, res) => {
         }
         res.status(200).json(comments);
     } catch (error) {
-        console.error("Error fetching comments by post ID:", error);
-        res.status(500).json({error: "Server error."});
+        res.status(500).json({error: error.message});
     }
 };
 
@@ -65,8 +64,8 @@ const updateComment = async (req, res) => {
             }
             res.status(200).json(comment);
         }
-    } catch (err) {
-        res.status(500).json({error: err.message});
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
 };
 
@@ -76,8 +75,8 @@ const deleteComment = async (req, res) => {
         const comment = await Comment.findByIdAndDelete(commentId);
         if (!comment) return res.status(404).json({message: 'Comment not found'});
         res.status(200).json({message: 'Comment deleted successfully'});
-    } catch (err) {
-        res.status(500).json({error: err.message});
+    } catch (error) {
+        res.status(500).json({error: error.message});
     }
 };
 
