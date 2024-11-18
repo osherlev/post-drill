@@ -6,10 +6,10 @@ router.post("/createPost", postController.createPost);
 
 router.get("/getAllPosts", postController.getAllPosts);
 
-router.get("/post/:id", postController.getPostById);
+router.get("/:id", postController.getPostById);
 
 router.get("/post", postController.getPostsBySender);
 
-router.put("/post/:id", postController.updatePost);
+router.put("/:id", postController.updatePost);
 
 module.exports = router;
