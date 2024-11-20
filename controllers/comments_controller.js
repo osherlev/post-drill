@@ -1,4 +1,4 @@
-const Comment = require("../models/comment");
+const Comment = require("../models/comments_model");
 
 const createComment = async (req, res) => {
     try {
@@ -40,7 +40,7 @@ const getCommentById = async (req, res) => {
 
 const getCommentsByPost = async (req, res) => {
     try {
-        const postId = req.params.postId;
+        const postId = req.params.post_id;
         if (!postId) {
             return res.status(400).json({error: "Post ID is required."});
         }
@@ -56,7 +56,7 @@ const getCommentsByPost = async (req, res) => {
 
 const updateComment = async (req, res) => {
     try {
-        const commentId = req.params.comment_id;
+        const commentId = req.params.id;
         if (commentId) {
             const comment = await Comment.findByIdAndUpdate(commentId, req.body, {new: true});
             if (!comment) {
@@ -71,7 +71,7 @@ const updateComment = async (req, res) => {
 
 const deleteComment = async (req, res) => {
     try {
-        const commentId = req.params.comment_id;
+        const commentId = req.params.id;
         const comment = await Comment.findByIdAndDelete(commentId);
         if (!comment) return res.status(404).json({message: 'Comment not found'});
         res.status(200).json({message: 'Comment deleted successfully'});
