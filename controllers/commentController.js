@@ -46,7 +46,7 @@ const getCommentById = async (req, res) => {
 
 const getCommentsByPost = async (req, res) => {
   try {
-    const postId = req.params.postId;
+    const postId = req.params.post_id;
     if (!postId) {
       return res.status(400).json({ error: "Post ID is required." });
     }
