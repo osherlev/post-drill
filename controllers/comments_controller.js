@@ -1,4 +1,4 @@
-const Comment = require("../models/comment");
+const Comment = require("../models/comments_model");
 
 const createComment = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ const createComment = async (req, res) => {
 };
 
 const getCommentsBySender = async (req, res) => {
-  const filter = req.params.sender;
+  const filter = req.body.sender;
   let comments;
   try {
     comments = filter
@@ -46,7 +46,7 @@ const getCommentById = async (req, res) => {
 
 const getCommentsByPost = async (req, res) => {
   try {
-    const postId = req.params.postId;
+    const postId = req.params.post_id;
     if (!postId) {
       return res.status(400).json({ error: "Post ID is required." });
     }
