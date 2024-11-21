@@ -2,7 +2,7 @@
 Posts API
 ---------------------------------
 Create a New Post
-POST http://localhost:3000/createPost
+POST http://localhost:3000/posts/createPost
 Content-Type: application/json
 
 {
@@ -21,11 +21,11 @@ GET http://localhost:3000/posts/673cc241e8cf2cf4cf46298e
 
 ###
 Get Posts by Sender
-GET http://localhost:3000/post?sender=Osher
+GET http://localhost:3000/posts?sender=Osher
 
 ###
 Update a Post
-PUT http://localhost:3000/post/673cc241e8cf2cf4cf46298e
+PUT http://localhost:3000/posts/673cc241e8cf2cf4cf46298e
 Content-Type: application/json
 
 {
@@ -49,7 +49,7 @@ Content-Type: application/json
 
 ###
 Get a Comment by Sender
-GET http://localhost:3000/comments/
+GET http://localhost:3000/comments/?sender=Osher
 
 ###
 
