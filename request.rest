@@ -49,7 +49,7 @@ Content-Type: application/json
 
 ###
 Get a Comment by Sender
-GET http://localhost:3000/comments/?sender=Osher
+GET http://localhost:3000/comments/?sender=Alik
 
 ###
 
