@@ -38,8 +38,9 @@ const getPostById = async (req, res) => {
 
 const getPostsBySender = async (req, res) => {
   try {
-    const { sender } = req.query.sender;
-    const posts = await Post.find(sender);
+    const sender = req.query.sender;
+
+    const posts = await Post.find({ sender });
     if (posts.length === 0) {
       return res
         .status(404)
@@ -53,12 +54,10 @@ const getPostsBySender = async (req, res) => {
 
 const updatePost = async (req, res) => {
   try {
-    const { message, sender } = req.body;
-    const post = await Post.findByIdAndUpdate(
-      req.params.id,
-      { message, sender },
-      { new: true }
-    );
+    const updatedData = req.body;
+    const post = await Post.findByIdAndUpdate(req.params.id, updatedData, {
+      new: true,
+    });
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
